@@ -1,6 +1,5 @@
 package commands.handlers;
 
-import authentification.Permission;
 import authentification.User;
 import commands.src.CommandRequest;
 
@@ -11,7 +10,6 @@ public abstract class CommandHandler {
     protected User user;
     protected List<String> args;
 
-    protected Permission requiredPermission = null;
 
     public CommandHandler(CommandRequest request) {
         List<String> args = request.getArgs();

@@ -1,10 +1,10 @@
 package authentification;
 
 public class User {
-    private int id;
-    private String username;
-    private String passwordHash;
-    private Permission permission;
+    private final int id;
+    private final String username;
+    private final String passwordHash;
+    private final Permission permission;
 
     public User(int id, String username, String passwordHash, Permission permission) {
         this.id = id;
