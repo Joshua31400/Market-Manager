@@ -9,13 +9,13 @@ public class HelpCmd extends CommandHandler {
     }
     @Override
     public void execute() {
-        if (!handleArgs()) {
+        if (!validateArgs()) {
             return;
         }
         System.out.println(getCommonHelpMessage());
     }
 
-    private boolean handleArgs() {
+    private boolean validateArgs() {
         if (!args.isEmpty()) {
             System.out.println("The help command does not take any arguments.");
             return false;
