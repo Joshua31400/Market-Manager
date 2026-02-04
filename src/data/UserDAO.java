@@ -1,7 +1,7 @@
 package data;
 
 import authentification.Permission;
-import authentification.User;
+import models.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

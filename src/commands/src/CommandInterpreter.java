@@ -1,6 +1,6 @@
 package commands.src;
 
-import authentification.User;
+import models.User;
 import commands.handlers.CommandHandler;
 import commands.handlers.CommandHandlerFactory;
 

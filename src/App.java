@@ -1,8 +1,6 @@
-import authentification.User;
+import models.User;
 import commands.src.CommandInterpreter;
 import utils.InputReader;
-
-import java.util.Scanner;
 
 public class App {
     private User currentUser = null;

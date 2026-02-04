@@ -1,5 +1,6 @@
-package authentification;
+package models;
 
+import authentification.Permission;
 import data.UserDAO;
 
 import java.io.IOException;

@@ -1,6 +1,6 @@
 package commands.handlers;
 
-import authentification.User;
+import models.User;
 import commands.src.CommandRequest;
 
 import java.util.List;
