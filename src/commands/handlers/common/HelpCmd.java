@@ -28,7 +28,7 @@ public class HelpCmd extends CommandHandler {
                Common commands:
                - help: Show this help message.
                - clear: Clear the terminal.
-               - exit: Exit the application.
+               - quit: Exit the application.
                """;
     }
 

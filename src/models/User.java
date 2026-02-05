@@ -18,7 +18,7 @@ public class User {
         this.permission = permission;
     }
 
-    public User(String username, String passwordHash, Permission permission) throws IOException {
+    public User(String username, String passwordHash, Permission permission){
         this.id = UserDAO.getInstance().autoIncrement();
         this.username = username;
         this.passwordHash = passwordHash;

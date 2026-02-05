@@ -4,8 +4,6 @@ import authentification.Permission;
 import models.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 
@@ -15,12 +13,12 @@ public class UserDAO extends Database {
         private List<User> users;
 
 
-        private UserDAO() throws IOException {
+        private UserDAO(){
             filePath = "src/data/tables/users.json";
             loadData();
         }
 
-        public static UserDAO getInstance() throws IOException {
+        public static UserDAO getInstance(){
             if (instance == null) {
                 instance = new UserDAO();
             }
