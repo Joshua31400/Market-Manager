@@ -15,7 +15,7 @@ public class App {
             if (currentUser == null) {
                 requestAuth();
             } else {
-                String input = InputReader.getInstance().readString("> ");
+                String input = InputReader.getInstance().readString( currentUser.getUsername() + "(" + currentUser.getPermission() + ")" + "> ");
                 CommandInterpreter.interpretCommand(input, currentUser);
             }
         }
