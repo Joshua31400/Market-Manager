@@ -3,10 +3,10 @@ package commands.handlers;
 
 import commands.handlers.common.HelpCmd;
 import commands.handlers.common.QuitCmd;
-import commands.handlers.common.UserListCmd;
-import commands.handlers.common.AddUserCmd;
-import commands.handlers.common.UpdatePermissionCmd;
-import commands.handlers.common.RemoveUserCmd;
+import commands.handlers.staff.AddStockCmd;
+import commands.handlers.staff.DeleteStockCmd;
+import commands.handlers.staff.ViewStockCmd;
+import commands.handlers.staff.UpdateStockCmd;
 import commands.src.CommandRequest;
 
 public class CommandHandlerFactory {
