@@ -12,7 +12,7 @@ public class EmptyCartCmd extends CommandHandler {
 
     @Override
     public void execute() {
-        if (validatePermission()) {
+        if (!validatePermission()) {
             return;
         }
 

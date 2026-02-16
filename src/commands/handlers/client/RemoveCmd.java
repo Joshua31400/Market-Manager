@@ -14,7 +14,7 @@ public class RemoveCmd extends CommandHandler {
 
     @Override
     public void execute() {
-        if (validatePermission()) {
+        if (!validatePermission()) {
             return;
         }
 

@@ -42,6 +42,32 @@ public class AddCmd extends CommandHandler {
             return;
         }
 
+        for (Product cartProduct : cart.getProducts()) {
+            if (cartProduct.getId() == productId) {
+                if (product.getQuantity() < quantity + cartProduct.getQuantity()) {
+                    System.out.println("Not enough stock available. Current stock: " + product.getQuantity());
+                    System.out.println();
+                } else {
+                    Product updatedCartProduct = new Product(
+                            cartProduct.getId(),
+                            cartProduct.getName(),
+                            cartProduct.getQuantity() + quantity,
+                            cartProduct.getPrice()
+                    );
+                    cart.getProducts().remove(cartProduct);
+                    cart.getProducts().add(updatedCartProduct);
+                    boolean success = CartDAO.getInstance().update(cart);
+                    if (success) {
+                        System.out.println("Added " + quantity + " of '" + product.getName() + "' to your cart.");
+                    } else {
+                        System.out.println("Failed to update your cart. Please try again later.");
+                    }
+                    System.out.println();
+                }
+                return;
+            }
+        }
+
         if (product.getQuantity() < quantity) {
             System.out.println("Not enough stock available. Current stock: " + product.getQuantity());
             System.out.println();

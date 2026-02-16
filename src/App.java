@@ -15,7 +15,7 @@ public class App {
             if (currentUser == null) {
                 currentUser = AuthService.requestAuth();
             } else {
-                String input = InputReader.getInstance().readString( currentUser.getUsername() + " (" + currentUser.getPermission() + ") " + "> ");
+                String input = InputReader.getInstance().readString(currentUser.getUsername() + " (" + currentUser.getPermission() + ") " + "> ");
                 if (input.trim().equalsIgnoreCase("logout")) {
                     currentUser = null;
                     TerminalUtils.clearTerminal();

@@ -6,6 +6,7 @@ import commands.src.CommandRequest;
 import data.CartDAO;
 import data.UserDAO;
 import models.User;
+import utils.Colors;
 
 public class UpdatePermissionCmd extends CommandHandler {
     public UpdatePermissionCmd(CommandRequest request) {
@@ -28,7 +29,7 @@ public class UpdatePermissionCmd extends CommandHandler {
 
         User targetUser = UserDAO.getInstance().selectById(userId);
         if (targetUser == null) {
-            System.out.println("User not found.");
+            System.out.println(Colors.warning("User not found."));
             System.out.println();
             return;
         }
@@ -42,7 +43,7 @@ public class UpdatePermissionCmd extends CommandHandler {
         UserDAO.getInstance().update(updatedUser);
 
         if (targetUser.getId() == user.getId()) {
-            System.out.println("Your permissions have been updated. Please log in again to see the changes.");
+            System.out.println(Colors.success("Your permissions have been updated. Please log in again to see the changes."));
             System.out.println();
         }
 
@@ -57,7 +58,7 @@ public class UpdatePermissionCmd extends CommandHandler {
 
     private boolean validatePermission() {
         if (user.getPermission() != Permission.ADMIN) {
-            System.out.println("Access denied. This command is restricted to administrators.");
+            System.out.println(Colors.warning("Access denied. This command is restricted to administrators."));
             System.out.println();
             return false;
         }
@@ -66,7 +67,7 @@ public class UpdatePermissionCmd extends CommandHandler {
 
     private boolean validateArgs() {
         if (args.size() != 2) {
-            System.out.println("Usage: updatepermission <id> <permission>");
+            System.out.println(Colors.warning("Usage: updatepermission <id> <permission>"));
             System.out.println();
             return false;
         }
@@ -74,14 +75,14 @@ public class UpdatePermissionCmd extends CommandHandler {
         try {
             Integer.parseInt(args.get(0));
         } catch (NumberFormatException e) {
-            System.out.println("Invalid user ID. Must be a number.");
+            System.out.println(Colors.warning("Invalid user ID. Must be a number."));
             System.out.println();
             return false;
         }
 
         String permissionStr = args.get(1).toUpperCase();
         if (!permissionStr.equals("CLIENT") && !permissionStr.equals("STAFF") && !permissionStr.equals("ADMIN")) {
-            System.out.println("Invalid permission. Use CLIENT, STAFF or ADMIN.");
+            System.out.println(Colors.warning("Invalid permission. Use CLIENT, STAFF or ADMIN."));
             System.out.println();
             return false;
         }

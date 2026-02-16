@@ -3,15 +3,17 @@ package authentification;
 import data.CartDAO;
 import data.UserDAO;
 import models.User;
+import utils.Colors;
 import utils.InputReader;
 
 public class AuthService {
     public static User requestAuth() {
         System.out.println();
-        System.out.println("Welcome! Please choose an option:");
-        System.out.println("1. Login");
-        System.out.println("2. Register");
-        System.out.println("3. Exit");
+        System.out.println(Colors.primary("Welcome! Please choose an option:"));
+        System.out.println();
+        System.out.println(Colors.colorize("1", Colors.CYAN_BOLD) + Colors.secondary(". login"));
+        System.out.println(Colors.colorize("2", Colors.CYAN_BOLD) + Colors.secondary(". register"));
+        System.out.println(Colors.colorize("3", Colors.CYAN_BOLD) + Colors.secondary(". exit"));
         System.out.println();
 
         InputReader reader = InputReader.getInstance();
@@ -22,7 +24,7 @@ public class AuthService {
             case 1 -> {return requestLogin();}
             case 2 -> {return requestRegister();}
             case 3 -> {
-                System.out.println("Exiting the application. Goodbye!");
+                System.out.println(Colors.primary("Exiting the application. Goodbye!"));
                 System.out.println();
                 System.exit(0);
             }
@@ -32,7 +34,7 @@ public class AuthService {
 
     private static User requestLogin() {
         InputReader reader = InputReader.getInstance();
-        System.out.println("Please enter your login credentials:");
+        System.out.println(Colors.primary("Please enter your login credentials:"));
         System.out.println();
         String username = reader.readString("Username: ");
         String password = reader.readStringHidden("Password: ");
@@ -41,11 +43,11 @@ public class AuthService {
         User user = AuthService.login(username, password);
 
         if (user != null) {
-            System.out.println("Login successful!");
+            System.out.println(Colors.success("Login successful!"));
             System.out.println();
             return user;
         } else {
-            System.out.println("Login failed. Please try again.");
+            System.out.println(Colors.error("Login failed. Please try again."));
             System.out.println();
             return null;
         }
@@ -53,7 +55,7 @@ public class AuthService {
 
     private static User requestRegister() {
         InputReader reader = InputReader.getInstance();
-        System.out.println("Please enter your registration details:");
+        System.out.println(Colors.primary("Please enter your registration details:"));
         System.out.println();
         String username = reader.readString("Choose a username: ");
         String password = reader.readStringHidden("Choose a password: ");
@@ -64,11 +66,11 @@ public class AuthService {
         System.out.println();
 
         if (user != null) {
-            System.out.println("Registration successful! You can now log in.");
+            System.out.println(Colors.success("Registration successful! You can now log in."));
             System.out.println();
             return user;
         } else {
-            System.out.println("Registration failed. Please try again.");
+            System.out.println(Colors.error("Registration failed. Please try again."));
             System.out.println();
             return null;
         }
@@ -82,7 +84,7 @@ public class AuthService {
         }
 
         if (!success) {
-            System.out.println("Invalid username or password.");
+            System.out.println(Colors.warning("Invalid username or password."));
         }
         return success;
     }
@@ -96,12 +98,12 @@ public class AuthService {
 
     private static boolean validateRegister(String username, String password, String confirmPassword) {
         if (UserDAO.getInstance().selectByUsername(username) != null) {
-            System.out.println("Username already exists.");
+            System.out.println(Colors.warning("Username already exists."));
             return false;
         }
 
         if (!password.equals(confirmPassword)) {
-            System.out.println("Passwords do not match.");
+            System.out.println(Colors.warning("Passwords do not match."));
             return false;
         }
         return true;

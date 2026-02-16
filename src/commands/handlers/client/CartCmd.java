@@ -35,6 +35,7 @@ public class CartCmd extends CommandHandler {
 
         if (cart.getProducts().isEmpty()) {
             System.out.println("Your cart is empty.");
+            System.out.println();
         } else {
             System.out.println("Your Cart:");
             System.out.println("-".repeat(50));

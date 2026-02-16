@@ -5,6 +5,7 @@ import commands.src.CommandRequest;
 import data.UserDAO;
 import models.User;
 import authentification.Permission;
+import utils.Colors;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class UserListCmd extends CommandHandler {
         List<User> users = UserDAO.getInstance().selectAll();
 
         if (users.isEmpty()) {
-            System.out.println("No users found.");
+            System.out.println(Colors.warning("No users found."));
             return;
         }
 
