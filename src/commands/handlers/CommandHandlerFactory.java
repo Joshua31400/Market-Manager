@@ -5,6 +5,7 @@ import commands.handlers.common.HelpCmd;
 import commands.handlers.common.QuitCmd;
 import commands.handlers.common.UserListCmd;
 import commands.src.CommandRequest;
+import commands.handlers.common.AddUserCmd;
 
 public class CommandHandlerFactory {
     public static CommandHandler create(CommandRequest request) {
@@ -13,6 +14,7 @@ public class CommandHandlerFactory {
             case "help" -> new HelpCmd(request);
             case "quit" -> new QuitCmd(request);
             case "userlist" -> new UserListCmd(request);
+            case "adduser" -> new AddUserCmd(request);
             default -> null;
         };
     }
