@@ -4,6 +4,7 @@ import authentification.Permission;
 import commands.handlers.CommandHandler;
 import commands.src.CommandRequest;
 import data.ProductDAO;
+import utils.Colors;
 
 public class AddStockCmd extends CommandHandler {
 
@@ -27,7 +28,7 @@ public class AddStockCmd extends CommandHandler {
 
 
         if (ProductDAO.getInstance().selectByName(name) != null) {
-            System.out.println("The product '" + name + "' already exists in the stock.");
+            System.out.println(Colors.warning("The product '") + Colors.data(name) + Colors.warning("' already exists in the stock."));
             System.out.println();
             return;
         }
@@ -37,7 +38,7 @@ public class AddStockCmd extends CommandHandler {
 
     private boolean validatePermission() {
         if (user.getPermission() != Permission.STAFF && user.getPermission() != Permission.ADMIN) {
-            System.out.println("Access denied. This command is restricted to staff and administrators.");
+            System.out.println(Colors.warning("Access denied. This command is restricted to staff and administrators."));
             System.out.println();
             return false;
         }
@@ -46,7 +47,7 @@ public class AddStockCmd extends CommandHandler {
 
     private boolean validateArgs() {
         if (args.size() != 3) {
-            System.out.println("Usage: add <name> <quantity> <price>");
+            System.out.println(Colors.warning("Usage: add <name> <quantity> <price>"));
             System.out.println();
             return false;
         }
@@ -54,12 +55,12 @@ public class AddStockCmd extends CommandHandler {
         try {
             int newQuantity = Integer.parseInt(args.get(1));
             if (newQuantity < 0) {
-                System.out.println("Quantity cannot be negative.");
+                System.out.println(Colors.warning("Quantity cannot be negative."));
                 System.out.println();
                 return false;
             }
         } catch (NumberFormatException e) {
-            System.out.println("Invalid quantity. Must be a number.");
+            System.out.println(Colors.warning("Invalid quantity. Must be a number."));
             System.out.println();
             return false;
         }
@@ -67,12 +68,12 @@ public class AddStockCmd extends CommandHandler {
         try {
             double newPrice = Double.parseDouble(args.get(2));
             if (newPrice < 0) {
-                System.out.println("Price cannot be negative.");
+                System.out.println(Colors.warning("Price cannot be negative."));
                 System.out.println();
                 return false;
             }
         } catch (NumberFormatException e) {
-            System.out.println("Invalid price format. Must be a number.");
+            System.out.println(Colors.warning("Invalid price format. Must be a number."));
             System.out.println();
             return false;
         }

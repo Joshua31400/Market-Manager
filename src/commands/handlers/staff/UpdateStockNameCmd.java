@@ -5,6 +5,7 @@ import commands.handlers.CommandHandler;
 import commands.src.CommandRequest;
 import data.ProductDAO;
 import models.Product;
+import utils.Colors;
 
 public class UpdateStockNameCmd extends CommandHandler {
 
@@ -27,13 +28,13 @@ public class UpdateStockNameCmd extends CommandHandler {
 
         Product existingProduct = ProductDAO.getInstance().selectById(productId);
         if (existingProduct == null) {
-            System.out.println("Product not found.");
+            System.out.println(Colors.warning("Product not found."));
             System.out.println();
             return;
         }
 
         if (ProductDAO.getInstance().selectByName(newName) != null) {
-            System.out.println("The product name '" + newName + "' is already in use. Please choose a different name.");
+            System.out.println(Colors.warning("The product name '") + Colors.data(newName) + Colors.warning("' is already in use. Please choose a different name."));
             System.out.println();
             return;
         }
@@ -52,28 +53,28 @@ public class UpdateStockNameCmd extends CommandHandler {
 
     private boolean validatePermission() {
         if (user.getPermission() != Permission.STAFF && user.getPermission() != Permission.ADMIN) {
-            System.out.println("Access denied. This command is restricted to staff and administrators.");
+            System.out.println(Colors.warning("Access denied. This command is restricted to staff and administrators."));
             System.out.println();
             return false;
         }
         return true;
     }
 
-        private boolean validateArgs() {
-            if (args.size() != 2) {
-                System.out.println("Usage: updateitemname <id> <name>");
-                System.out.println();
-                return false;
-            }
-
-            try {
-                Integer.parseInt(args.get(0));
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid product ID. Must be a number.");
-                System.out.println();
-                return false;
-            }
-
-            return true;
+    private boolean validateArgs() {
+        if (args.size() != 2) {
+            System.out.println(Colors.warning("Usage: updateitemname <id> <name>"));
+            System.out.println();
+            return false;
         }
+
+        try {
+            Integer.parseInt(args.get(0));
+        } catch (NumberFormatException e) {
+            System.out.println(Colors.warning("Invalid product ID. Must be a number."));
+            System.out.println();
+            return false;
+        }
+
+        return true;
+    }
 }

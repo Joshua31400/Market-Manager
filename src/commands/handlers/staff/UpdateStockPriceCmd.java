@@ -6,6 +6,7 @@ import commands.src.CommandRequest;
 import data.Database;
 import data.ProductDAO;
 import models.Product;
+import utils.Colors;
 
 public class UpdateStockPriceCmd extends CommandHandler {
 
@@ -28,7 +29,7 @@ public class UpdateStockPriceCmd extends CommandHandler {
 
         Product existingProduct = ProductDAO.getInstance().selectById(productId);
         if (existingProduct == null) {
-            System.out.println("Product not found.");
+            System.out.println(Colors.warning("Product not found."));
             System.out.println();
             return;
         }
@@ -48,7 +49,7 @@ public class UpdateStockPriceCmd extends CommandHandler {
 
     private boolean validatePermission() {
         if (user.getPermission() != Permission.STAFF && user.getPermission() != Permission.ADMIN) {
-            System.out.println("Access denied. This command is restricted to staff and administrators.");
+            System.out.println(Colors.warning("Access denied. This command is restricted to staff and administrators."));
             System.out.println();
             return false;
         }
@@ -57,7 +58,7 @@ public class UpdateStockPriceCmd extends CommandHandler {
 
     private boolean validateArgs() {
         if (args.size() != 2) {
-            System.out.println("Usage: updateitemprice <id> <price>");
+            System.out.println(Colors.warning("Usage: updateitemprice <id> <price>"));
             System.out.println();
             return false;
         }
@@ -65,7 +66,7 @@ public class UpdateStockPriceCmd extends CommandHandler {
         try {
             Integer.parseInt(args.get(0));
         } catch (NumberFormatException e) {
-            System.out.println("Invalid product ID. Must be a number.");
+            System.out.println(Colors.warning("Invalid product ID. Must be a number."));
             System.out.println();
             return false;
         }
@@ -73,12 +74,12 @@ public class UpdateStockPriceCmd extends CommandHandler {
         try {
             double newPrice = Double.parseDouble(args.get(1));
             if (newPrice < 0) {
-                System.out.println("Price cannot be negative.");
+                System.out.println(Colors.warning("Price cannot be negative."));
                 System.out.println();
                 return false;
             }
         } catch (NumberFormatException e) {
-            System.out.println("Invalid price format. Must be a number.");
+            System.out.println(Colors.warning("Invalid price format. Must be a number."));
             System.out.println();
             return false;
         }

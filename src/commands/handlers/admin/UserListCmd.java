@@ -32,22 +32,22 @@ public class UserListCmd extends CommandHandler {
             return;
         }
 
-        System.out.println("User List:");
-        System.out.println("-".repeat(50));
+        System.out.println(Colors.primary("User List:"));
+        System.out.println(Colors.primary("-".repeat(50)));
         for (User user : users) {
-            System.out.printf("ID: %d | Username: %s | Permission: %s%n",
+            System.out.printf(Colors.secondary("ID: ") + Colors.data("%d") + Colors.secondary(" | Username: ") + Colors.data("%s") + Colors.secondary(" | Permission: ") + Colors.data("%s%n"),
                     user.getId(),
                     user.getUsername(),
                     user.getPermission());
         }
-        System.out.println("-".repeat(50));
-        System.out.println("Total users: " + users.size());
+        System.out.println(Colors.primary("-".repeat(50)));
+        System.out.println(Colors.secondary("Total users: ") + Colors.data(String.valueOf(users.size())));
         System.out.println();
     }
 
     private boolean validatePermission() {
         if (user == null || user.getPermission() != Permission.ADMIN) {
-            System.out.println("Access denied. This command is restricted to administrators.");
+            System.out.println(Colors.warning("Access denied. This command is restricted to administrators."));
             System.out.println();
             return false;
         }
@@ -56,7 +56,7 @@ public class UserListCmd extends CommandHandler {
 
     private boolean validateArgs() {
         if (!args.isEmpty()) {
-            System.out.println("Usage: userlist");
+            System.out.println(Colors.warning("Usage: userlist"));
             System.out.println();
             return false;
         }

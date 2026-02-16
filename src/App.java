@@ -3,6 +3,7 @@ import authentification.Permission;
 import data.UserDAO;
 import models.User;
 import commands.src.CommandInterpreter;
+import utils.Colors;
 import utils.InputReader;
 import utils.TerminalUtils;
 
@@ -19,7 +20,7 @@ public class App {
                 if (input.trim().equalsIgnoreCase("logout")) {
                     currentUser = null;
                     TerminalUtils.clearTerminal();
-                    System.out.println("You have been logged out.");
+                    System.out.println(Colors.success("You have been logged out."));
                     System.out.println();
                     continue;
                 }

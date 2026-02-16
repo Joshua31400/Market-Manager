@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import models.Cart;
 import models.User;
+import utils.Colors;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -35,7 +36,7 @@ public class CartDAO extends Database {
             carts = gson.fromJson(jsonString, listType);
             updateAutoIncrementId();
         } catch (Exception e) {
-            System.out.println("Error loading cart data: " + e.getMessage());
+            System.out.println(Colors.error("Error loading cart data: " + e.getMessage()));
         }
     }
 
@@ -46,7 +47,7 @@ public class CartDAO extends Database {
             String jsonString = gson.toJson(carts);
             writeFile(jsonString);
         } catch (Exception e) {
-            System.out.println("Error saving user data: " + e.getMessage());
+            System.out.println(Colors.error("Error saving user data: " + e.getMessage()));
         }
     }
 
@@ -66,11 +67,11 @@ public class CartDAO extends Database {
             Cart cart = new Cart(userId);
             carts.add(cart);
             saveData();
-            System.out.println("Cart added successfully.");
+            System.out.println(Colors.success("Cart added successfully."));
             return true;
         } catch (Exception e) {
-            System.out.println("Error inserting cart: " + e.getMessage());
-            System.out.println("Aborting...");
+            System.out.println(Colors.error("Error inserting cart: " + e.getMessage()));
+            System.out.println(Colors.error("Aborting..."));
             carts.removeLast();
             return false;
         }
@@ -79,7 +80,7 @@ public class CartDAO extends Database {
     public boolean update(Cart updatedCart){
         Cart existingCart = selectById(updatedCart.getId());
         if (existingCart == null) {
-            System.out.println("Cart not found.");
+            System.out.println(Colors.warning("Cart not found."));
             return false;
         }
 
@@ -88,14 +89,14 @@ public class CartDAO extends Database {
                 if (carts.get(i).getId() == updatedCart.getId()) {
                     carts.set(i, updatedCart);
                     saveData();
-                    System.out.println("Cart updated successfully.");
+                    System.out.println(Colors.success("Cart updated successfully."));
                     return true;
                 }
             }
             return false;
         } catch (Exception e) {
-            System.out.println("Error updating cart: " + e.getMessage());
-            System.out.println("Aborting...");
+            System.out.println(Colors.error("Error updating cart: " + e.getMessage()));
+            System.out.println(Colors.error("Aborting..."));
             carts.set(carts.indexOf(updatedCart), existingCart);
             return false;
         }
@@ -104,17 +105,17 @@ public class CartDAO extends Database {
     public boolean delete(int userId){
         Cart existingCart = selectByUserId(userId);
         if (existingCart == null) {
-            System.out.println("Cart not found.");
+            System.out.println(Colors.warning("Cart not found."));
             return false;
         }
         try {
             carts.removeIf(u -> u.getUserId() == userId);
             saveData();
-            System.out.println("Cart deleted successfully.");
+            System.out.println(Colors.success("Cart deleted successfully."));
             return true;
         } catch (Exception e) {
-            System.out.println("Error deleting cart: " + e.getMessage());
-            System.out.println("Aborting...");
+            System.out.println(Colors.error("Error deleting cart: " + e.getMessage()));
+            System.out.println(Colors.error("Aborting..."));
             carts.add(existingCart);
             return false;
         }

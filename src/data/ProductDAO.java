@@ -5,6 +5,7 @@ import models.Product;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import models.User;
+import utils.Colors;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class ProductDAO extends Database {
             }
             updateAutoIncrementId();
         } catch (Exception e) {
-            System.out.println("Error loading product data: " + e.getMessage());
+            System.out.println(Colors.error("Error loading product data: " + e.getMessage()));
             products = new ArrayList<>();
         }
     }
@@ -50,7 +51,7 @@ public class ProductDAO extends Database {
             String jsonString = gson.toJson(products);
             writeFile(jsonString);
         } catch (Exception e) {
-            System.out.println("Error saving product data: " + e.getMessage());
+            System.out.println(Colors.error("Error saving product data: " + e.getMessage()));
         }
     }
 
@@ -73,11 +74,11 @@ public class ProductDAO extends Database {
             Product product = new Product(name, qty, price);
             products.add(product);
             saveData();
-            System.out.println("Product added successfully.");
+            System.out.println(Colors.success("Product added successfully."));
             return true;
         } catch (Exception e) {
-            System.out.println("Error inserting product: " + e.getMessage());
-            System.out.println("Aborting...");
+            System.out.println(Colors.error("Error inserting product: " + e.getMessage()));
+            System.out.println(Colors.error("Aborting..."));
             products.removeLast();
             return false;
         }
@@ -90,15 +91,15 @@ public class ProductDAO extends Database {
                 if (products.get(i).getId() == updatedProduct.getId()) {
                     products.set(i, updatedProduct);
                     saveData();
-                    System.out.println("Product updated successfully.");
+                    System.out.println(Colors.success("Product updated successfully."));
                     return true;
                 }
             }
-            System.out.println("Product not found.");
+            System.out.println(Colors.warning("Product not found."));
             return false;
         } catch (Exception e) {
-            System.out.println("Error updating user: " + e.getMessage());
-            System.out.println("Aborting...");
+            System.out.println(Colors.error("Error updating user: " + e.getMessage()));
+            System.out.println(Colors.error("Aborting..."));
             products.set(products.indexOf(updatedProduct), existingProduct);
             return false;
         }
@@ -109,11 +110,11 @@ public class ProductDAO extends Database {
         try {
             products.removeIf(u -> u.getId() == productId);
             saveData();
-            System.out.println("Product deleted successfully.");
+            System.out.println(Colors.success("Product deleted successfully."));
             return true;
         } catch (Exception e) {
-            System.out.println("Error deleting Product: " + e.getMessage());
-            System.out.println("Aborting...");
+            System.out.println(Colors.error("Error deleting Product: " + e.getMessage()));
+            System.out.println(Colors.error("Aborting..."));
             products.add(existingProduct);
             return false;
         }

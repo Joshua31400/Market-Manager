@@ -2,6 +2,7 @@ package commands.handlers.common;
 
 import commands.handlers.CommandHandler;
 import commands.src.CommandRequest;
+import utils.Colors;
 import utils.TerminalUtils;
 
 public class ClearCmd extends CommandHandler {
@@ -19,7 +20,7 @@ public class ClearCmd extends CommandHandler {
 
     private boolean validateArgs() {
         if (!args.isEmpty()) {
-            System.out.println("Usage: clear");
+            System.out.println(Colors.warning("Usage: clear"));
             return false;
         }
         return true;

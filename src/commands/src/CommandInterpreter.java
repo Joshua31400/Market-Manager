@@ -3,6 +3,7 @@ package commands.src;
 import models.User;
 import commands.handlers.CommandHandler;
 import commands.handlers.CommandHandlerFactory;
+import utils.Colors;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class CommandInterpreter {
         if (handler != null) {
             handler.execute();
         } else {
-            System.out.println("Unknown command: " + parts[0]);
+            System.out.println(Colors.warning("Unknown command: ") + Colors.colorize(args.getFirst(), Colors.CYAN_BOLD));
             System.out.println();
         }
 
