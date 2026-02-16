@@ -6,6 +6,7 @@ import commands.handlers.common.QuitCmd;
 import commands.handlers.common.UserListCmd;
 import commands.handlers.common.AddUserCmd;
 import commands.handlers.common.UpdatePermissionCmd;
+import commands.handlers.common.RemoveUserCmd;
 import commands.src.CommandRequest;
 
 public class CommandHandlerFactory {
@@ -17,6 +18,7 @@ public class CommandHandlerFactory {
             case "userlist" -> new UserListCmd(request);
             case "adduser" -> new AddUserCmd(request);
             case "updatepermission" -> new UpdatePermissionCmd(request);
+            case "removeuser" -> new RemoveUserCmd(request);
             default -> null;
         };
     }
