@@ -1,1 +1,1 @@
-[{"id":1,"username":"toto","passwordHash":"$2a$10$Y3BRA.OTjZEhkJxKzvuv1usuT072s35xjs3N1gnQb550W8QAQkUWu","permission":"CLIENT"}]
+[{"id":1,"username":"toto","passwordHash":"$2a$10$Y3BRA.OTjZEhkJxKzvuv1usuT072s35xjs3N1gnQb550W8QAQkUWu","permission":"CLIENT"},{"id":2,"username":"ban","passwordHash":"$2a$10$J5tLpIUJURe5nomVwmkZ0.L9Viy6VR0vmE6yGT4WOL6btOVcCms3G","permission":"STAFF"}]
