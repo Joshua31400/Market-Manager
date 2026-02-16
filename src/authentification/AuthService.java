@@ -1,5 +1,6 @@
 package authentification;
 
+import data.CartDAO;
 import data.UserDAO;
 import models.User;
 
@@ -40,7 +41,12 @@ public class AuthService {
     public static User register(String username, String password, String confirmPassword, Permission permission) {
         if (validateRegister(username, password, confirmPassword)) {
             String passwordHash = PasswordHasher.hashPassword(password);
-            boolean success = UserDAO.getInstance().insert(username, passwordHash, permission);
+
+            boolean success1 = UserDAO.getInstance().insert(username, passwordHash, permission);
+            boolean success2 = CartDAO.getInstance().insert(UserDAO.getInstance().selectByUsername(username).getId());
+
+            boolean success = success1 && success2;
+
             if (success) {
                 return UserDAO.getInstance().selectByUsername(username);
             }
