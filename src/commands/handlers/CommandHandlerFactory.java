@@ -3,6 +3,7 @@ package commands.handlers;
 
 import commands.handlers.common.HelpCmd;
 import commands.handlers.common.QuitCmd;
+import commands.handlers.common.UserListCmd;
 import commands.src.CommandRequest;
 
 public class CommandHandlerFactory {
@@ -11,6 +12,7 @@ public class CommandHandlerFactory {
         return switch (commandName) {
             case "help" -> new HelpCmd(request);
             case "quit" -> new QuitCmd(request);
+            case "userlist" -> new UserListCmd(request);
             default -> null;
         };
     }

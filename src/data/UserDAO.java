@@ -12,6 +12,9 @@ public class UserDAO extends Database {
 
         private List<User> users;
 
+        public List<User> getAll() {
+            return users;
+        }
 
         private UserDAO(){
             filePath = "src/data/tables/users.json";

@@ -1,18 +1,30 @@
 package commands.handlers.common;
 
+import authentification.Permission;
 import commands.handlers.CommandHandler;
 import commands.src.CommandRequest;
 
 public class HelpCmd extends CommandHandler {
-    public HelpCmd(CommandRequest request) {
-        super(request);
-    }
+    public HelpCmd(CommandRequest request) {super(request);}
     @Override
     public void execute() {
         if (!validateArgs()) {
             return;
         }
         System.out.println(getCommonHelpMessage());
+
+        if (user != null) {
+            Permission permission = user.getPermission();
+            if (permission == Permission.CLIENT) {
+                System.out.println(getClientHelpMessage());
+            } else if (permission == Permission.STAFF) {
+                System.out.println(getClientHelpMessage());
+                System.out.println(getStaffHelpMessage());
+            } else if (permission == Permission.ADMIN) {
+                System.out.println(getStaffHelpMessage());
+                System.out.println(getAdminHelpMessage());
+            }
+        }
     }
 
     private boolean validateArgs() {
@@ -36,7 +48,7 @@ public class HelpCmd extends CommandHandler {
 
     private String getClientHelpMessage() {
         return """
-               Available commands:
+               Client commands:
                 - add <id> - Add item to cart by id.
                 - remove <id> - Remove item from cart by id.
                 - cart - View items in your shopping cart.
@@ -46,7 +58,7 @@ public class HelpCmd extends CommandHandler {
 
     private String getStaffHelpMessage() {
         return """
-               Available commands:
+               Staff commands:
                 - additem <name> <price> <quantity> - Add a new item to the catalog.
                 - removeitem <id> - Remove an item from the catalog by its ID.
                """;
@@ -54,12 +66,11 @@ public class HelpCmd extends CommandHandler {
 
     private String getAdminHelpMessage() {
         return """
-               Available commands:
+               Admin commands:
                 - userlist - List all users in the system.
                 - adduser <username> <password> <permission> - Add a new user with the specified username, password, and permission level (CLIENT, STAFF, ADMIN).
                 - updatepermission <id> <status> - Update the permission of an user by its ID. Status can be CLIENT, STAFF or ADMIN.
                 - removeuser <id> - Remove a user by their username.
                """;
     }
-
 }
