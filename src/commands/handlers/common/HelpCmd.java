@@ -37,18 +37,20 @@ public class HelpCmd extends CommandHandler {
     private String getCommonHelpMessage() {
         return """
                Common commands:
-               - help: Show this help message.
+               - help - Show this help message.
                - catalog - List all items in the catalog.
-               - clear: Clear the terminal.
-               - quit: Exit the application.
+               - clear - Clear the terminal.
+               - logout - Log out of your account.
+               - quit - Exit the application.
                """;
     }
 
     private String getClientHelpMessage() {
         return """
                Client commands:
-                - add <id> - Add item to cart by id.
+                - add <id> <quantity> - Add item to cart by id.
                 - remove <id> - Remove item from cart by id.
+                - emptycart - Empty your shopping cart.
                 - cart - View items in your shopping cart.
                 - buy - Purchase items in your cart.
                """;

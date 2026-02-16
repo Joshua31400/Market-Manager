@@ -27,15 +27,18 @@ public class RemoveStockCmd extends CommandHandler {
 
         if (targetProduct == null) {
             System.out.println("Product not found.");
+            System.out.println();
             return;
         }
 
         ProductDAO.getInstance().delete(id);
+        System.out.println();
     }
 
     private boolean validatePermission() {
         if (user.getPermission() != Permission.STAFF && user.getPermission() != Permission.ADMIN) {
             System.out.println("Access denied. This command is restricted to staff and administrators.");
+            System.out.println();
             return false;
         }
         return true;
@@ -44,6 +47,7 @@ public class RemoveStockCmd extends CommandHandler {
     private boolean validateArgs() {
         if (args.size() != 1) {
             System.out.println("Usage: removeitem <id>");
+            System.out.println();
             return false;
         }
 
@@ -51,6 +55,7 @@ public class RemoveStockCmd extends CommandHandler {
             Integer.parseInt(args.get(0));
         } catch (NumberFormatException e) {
             System.out.println("Invalid product ID. Must be a number.");
+            System.out.println();
             return false;
         }
 

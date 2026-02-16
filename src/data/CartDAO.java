@@ -77,8 +77,8 @@ public class CartDAO extends Database {
     }
 
     public boolean update(Cart updatedCart){
-        Cart existingUser = selectById(updatedCart.getId());
-        if (existingUser == null) {
+        Cart existingCart = selectById(updatedCart.getId());
+        if (existingCart == null) {
             System.out.println("Cart not found.");
             return false;
         }
@@ -96,7 +96,7 @@ public class CartDAO extends Database {
         } catch (Exception e) {
             System.out.println("Error updating cart: " + e.getMessage());
             System.out.println("Aborting...");
-            carts.set(carts.indexOf(updatedCart), existingUser);
+            carts.set(carts.indexOf(updatedCart), existingCart);
             return false;
         }
     }

@@ -26,11 +26,13 @@ public class AddUserCmd extends CommandHandler {
         String permissionStr = args.get(2).toUpperCase();
 
         AuthService.register(username, password, password, Permission.valueOf(permissionStr));
+        System.out.println();
     }
 
     private boolean validatePermission() {
         if (user.getPermission() != Permission.ADMIN) {
             System.out.println("Access denied. This command is restricted to administrators.");
+            System.out.println();
             return false;
         }
 
@@ -40,12 +42,14 @@ public class AddUserCmd extends CommandHandler {
     private boolean validateArgs() {
         if (args.size() != 3) {
             System.out.println("Usage: adduser <username> <password> <permission>");
+            System.out.println();
             return false;
         }
 
         String permissionStr = args.get(2).toUpperCase();
         if (!permissionStr.equals("CLIENT") && !permissionStr.equals("STAFF") && !permissionStr.equals("ADMIN")) {
             System.out.println("Invalid permission. Use CLIENT, STAFF or ADMIN.");
+            System.out.println();
             return false;
         }
 

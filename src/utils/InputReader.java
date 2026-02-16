@@ -30,7 +30,7 @@ public class InputReader {
     public String readStringHidden() {
         if (System.console() != null) {
             char[] passwordChars = System.console().readPassword();
-            System.out.print("\033[1A"); // Move cursor up one line to cancel the newline from readPassword
+            System.out.print("\033[1A");
             return new String(passwordChars);
         } else {
             System.out.println("(warning: input visible in IDE)");
@@ -42,7 +42,7 @@ public class InputReader {
         System.out.print(label);
         if (System.console() != null) {
             char[] passwordChars = System.console().readPassword();
-            System.out.print("\033[1A"); // Move cursor up one line to cancel the newline from readPassword
+            System.out.print("\033[1A");
             return new String(passwordChars);
         } else {
             System.out.println("(warning: input visible in IDE)");

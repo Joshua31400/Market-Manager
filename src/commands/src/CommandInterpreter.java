@@ -23,6 +23,7 @@ public class CommandInterpreter {
             handler.execute();
         } else {
             System.out.println("Unknown command: " + parts[0]);
+            System.out.println();
         }
 
     }

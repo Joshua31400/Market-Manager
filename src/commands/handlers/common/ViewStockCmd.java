@@ -5,10 +5,6 @@ import commands.src.CommandRequest;
 import data.ProductDAO;
 import models.Product;
 
-/**
- * Command handler used to display the current state of the inventory.
- * Lists all products with their ID, Name, Quantity, and Price.
- */
 public class ViewStockCmd extends CommandHandler {
 
     public ViewStockCmd(CommandRequest request) {
@@ -25,6 +21,7 @@ public class ViewStockCmd extends CommandHandler {
 
         if (products.isEmpty()) {
             System.out.println("No products in stock.");
+            System.out.println();
             return;
         }
 
@@ -39,12 +36,14 @@ public class ViewStockCmd extends CommandHandler {
         }
         System.out.println("-".repeat(60));
         System.out.println("Total products: " + products.size());
+        System.out.println();
 
     }
 
     private boolean validateArgs() {
         if (!args.isEmpty()) {
             System.out.println("Usage: catalog");
+            System.out.println();
             return false;
         }
         return true;

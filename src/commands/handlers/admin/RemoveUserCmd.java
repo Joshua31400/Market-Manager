@@ -28,21 +28,25 @@ public class RemoveUserCmd extends CommandHandler {
         User targetUser = UserDAO.getInstance().selectById(userId);
         if (targetUser == null) {
             System.out.println("User not found.");
+            System.out.println();
             return;
         }
 
         if (targetUser.getId() == user.getId()) {
             System.out.println("You cannot remove yourself.");
+            System.out.println();
             return;
         }
 
         UserDAO.getInstance().delete(userId);
         CartDAO.getInstance().delete(userId);
+        System.out.println();
     }
 
     private boolean validatePermission() {
         if (user.getPermission() != Permission.ADMIN) {
             System.out.println("Access denied. This command is restricted to administrators.");
+            System.out.println();
             return false;
         }
         return true;
@@ -51,6 +55,7 @@ public class RemoveUserCmd extends CommandHandler {
     private boolean validateArgs() {
         if (args.size() != 1) {
             System.out.println("Usage: removeuser <id>");
+            System.out.println();
             return false;
         }
 
@@ -58,6 +63,7 @@ public class RemoveUserCmd extends CommandHandler {
             Integer.parseInt(args.get(0));
         } catch (NumberFormatException e) {
             System.out.println("Invalid user ID. Must be a number.");
+            System.out.println();
             return false;
         }
 

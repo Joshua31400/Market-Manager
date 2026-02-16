@@ -41,11 +41,13 @@ public class UserListCmd extends CommandHandler {
         }
         System.out.println("-".repeat(50));
         System.out.println("Total users: " + users.size());
+        System.out.println();
     }
 
     private boolean validatePermission() {
         if (user == null || user.getPermission() != Permission.ADMIN) {
             System.out.println("Access denied. This command is restricted to administrators.");
+            System.out.println();
             return false;
         }
         return true;
@@ -54,6 +56,7 @@ public class UserListCmd extends CommandHandler {
     private boolean validateArgs() {
         if (!args.isEmpty()) {
             System.out.println("Usage: userlist");
+            System.out.println();
             return false;
         }
         return true;

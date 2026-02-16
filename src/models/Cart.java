@@ -21,6 +21,22 @@ public class Cart {
         this.userId = userId;
     }
 
+    public int getTotalProducts() {
+        int total = 0;
+        for (Product product : products) {
+            total += product.getQuantity();
+        }
+        return total;
+    }
+
+    public double getTotalPrice() {
+        double total = 0;
+        for (Product product : products) {
+            total += product.getPrice();
+        }
+        return total;
+    }
+
     public int getId() {
         return id;
     }
