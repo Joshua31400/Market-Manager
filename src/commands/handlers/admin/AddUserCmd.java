@@ -1,9 +1,10 @@
-package commands.handlers.common;
+package commands.handlers.admin;
 
 import authentification.AuthService;
 import commands.handlers.CommandHandler;
 import commands.src.CommandRequest;
 import authentification.Permission;
+import models.User;
 
 public class AddUserCmd extends CommandHandler {
     public AddUserCmd(CommandRequest request) {
@@ -12,25 +13,23 @@ public class AddUserCmd extends CommandHandler {
 
     @Override
     public void execute() {
-        if (!validateArgs()) {
-            return;
-        }
-
         if (!validatePermission()) {
             return;
         }
 
+        if (!validateArgs()) {
+            return;
+        }
 
         String username = args.get(0);
         String password = args.get(1);
         String permissionStr = args.get(2).toUpperCase();
 
         AuthService.register(username, password, password, Permission.valueOf(permissionStr));
-
     }
 
     private boolean validatePermission() {
-        if (user == null || user.getPermission() != Permission.ADMIN) {
+        if (user.getPermission() != Permission.ADMIN) {
             System.out.println("Access denied. This command is restricted to administrators.");
             return false;
         }

@@ -2,16 +2,18 @@ package models;
 
 import data.CartDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Cart {
     private int id;
     private int userId;
-    //private List<Product> products;
+    private List<Product> products = new ArrayList<>();
 
-    public Cart(int id, int userId) {
+    public Cart(int id, int userId, List<Product> products) {
         this.id = id;
         this.userId = userId;
+        this.products = products;
     }
 
     public Cart(int userId) {
@@ -19,24 +21,15 @@ public class Cart {
         this.userId = userId;
     }
 
-    //public void addProduct(Product product) {
-        //products.add(product);
-    //}
-
-    //public void removeProduct(Product product) {
-        //products.remove(product);
-    //}
-
-    //public List<Products> getProducts() {
-        //return products;
-        //return null;
-    //}
-
     public int getId() {
         return id;
     }
 
     public int getUserId() {
         return userId;
+    }
+
+    public List<Product> getProducts() {
+        return products;
     }
 }

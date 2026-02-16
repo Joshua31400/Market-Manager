@@ -1,24 +1,40 @@
 package commands.handlers;
 
-
+import commands.handlers.admin.AddUserCmd;
+import commands.handlers.admin.RemoveUserCmd;
+import commands.handlers.admin.UpdatePermissionCmd;
+import commands.handlers.admin.UserListCmd;
+import commands.handlers.common.ClearCmd;
 import commands.handlers.common.HelpCmd;
 import commands.handlers.common.QuitCmd;
-import commands.handlers.staff.AddStockCmd;
-import commands.handlers.staff.DeleteStockCmd;
-import commands.handlers.staff.ViewStockCmd;
-import commands.handlers.staff.UpdateStockCmd;
+import commands.handlers.common.ViewStockCmd;
+import commands.handlers.staff.*;
 import commands.src.CommandRequest;
 
 public class CommandHandlerFactory {
     public static CommandHandler create(CommandRequest request) {
        String commandName = request.getArgs().getFirst();
         return switch (commandName) {
+            // Common commands
             case "help" -> new HelpCmd(request);
+            case "catalog" -> new ViewStockCmd(request);
+            case "clear" -> new ClearCmd(request);
             case "quit" -> new QuitCmd(request);
+
+            // Admin commands
             case "userlist" -> new UserListCmd(request);
             case "adduser" -> new AddUserCmd(request);
             case "updatepermission" -> new UpdatePermissionCmd(request);
             case "removeuser" -> new RemoveUserCmd(request);
+
+            // Staff commands
+            case "additem" -> new AddStockCmd(request);
+            case "removeitem" -> new RemoveStockCmd(request);
+            case "updateitemname" -> new UpdateStockNameCmd(request);
+            case "updateitemquantity" -> new UpdateStockQuantityCmd(request);
+            case "updateitemprice" -> new UpdateStockPriceCmd(request);
+
+
             default -> null;
         };
     }

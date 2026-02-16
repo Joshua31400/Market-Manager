@@ -15,7 +15,7 @@ public class CartDAO extends Database {
     private List<Cart> carts;
 
     private CartDAO() {
-        this.filePath = "src/data/tables/users.json";
+        this.filePath = "src/data/tables/carts.json";
         loadData();
     }
 
@@ -76,10 +76,39 @@ public class CartDAO extends Database {
         }
     }
 
-    public boolean delete(int userId){
-        Cart existingCart = selectById(userId);
+    public boolean update(Cart updatedCart){
+        Cart existingUser = selectById(updatedCart.getId());
+        if (existingUser == null) {
+            System.out.println("Cart not found.");
+            return false;
+        }
+
         try {
-            carts.removeIf(u -> u.getId() == userId);
+            for (int i = 0; i < carts.size(); i++) {
+                if (carts.get(i).getId() == updatedCart.getId()) {
+                    carts.set(i, updatedCart);
+                    saveData();
+                    System.out.println("Cart updated successfully.");
+                    return true;
+                }
+            }
+            return false;
+        } catch (Exception e) {
+            System.out.println("Error updating cart: " + e.getMessage());
+            System.out.println("Aborting...");
+            carts.set(carts.indexOf(updatedCart), existingUser);
+            return false;
+        }
+    }
+
+    public boolean delete(int userId){
+        Cart existingCart = selectByUserId(userId);
+        if (existingCart == null) {
+            System.out.println("Cart not found.");
+            return false;
+        }
+        try {
+            carts.removeIf(u -> u.getUserId() == userId);
             saveData();
             System.out.println("Cart deleted successfully.");
             return true;

@@ -2,9 +2,10 @@ package commands.handlers.common;
 
 import commands.handlers.CommandHandler;
 import commands.src.CommandRequest;
+import utils.TerminalUtils;
 
-public class QuitCmd extends CommandHandler {
-    public QuitCmd(CommandRequest request) {
+public class ClearCmd extends CommandHandler {
+    public ClearCmd(CommandRequest request) {
         super(request);
     }
 
@@ -13,13 +14,12 @@ public class QuitCmd extends CommandHandler {
         if (!validateArgs()) {
             return;
         }
-        System.out.println("Exiting the application. Goodbye!");
-        System.exit(0);
+        TerminalUtils.clearTerminal();
     }
 
     private boolean validateArgs() {
         if (!args.isEmpty()) {
-            System.out.println("Usage: quit");
+            System.out.println("Usage: clear");
             return false;
         }
         return true;

@@ -43,7 +43,12 @@ public class AuthService {
             String passwordHash = PasswordHasher.hashPassword(password);
 
             boolean success1 = UserDAO.getInstance().insert(username, passwordHash, permission);
-            boolean success2 = CartDAO.getInstance().insert(UserDAO.getInstance().selectByUsername(username).getId());
+
+            boolean success2 = true;
+
+            if (permission == Permission.CLIENT && success1) {
+                success2 = CartDAO.getInstance().insert(UserDAO.getInstance().selectByUsername(username).getId());
+            }
 
             boolean success = success1 && success2;
 

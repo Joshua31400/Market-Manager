@@ -16,7 +16,5 @@ public class CommandRequest {
     public User getUser() {
         return user;
     }
-    public List<String> getArgs() {
-        return args;
-    }
+    public List<String> getArgs() {return args;}
 }

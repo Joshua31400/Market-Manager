@@ -3,11 +3,13 @@ package commands.handlers.staff;
 import authentification.Permission;
 import commands.handlers.CommandHandler;
 import commands.src.CommandRequest;
+import data.Database;
 import data.ProductDAO;
+import models.Product;
 
-public class AddStockCmd extends CommandHandler {
+public class UpdateStockPriceCmd extends CommandHandler {
 
-    public AddStockCmd(CommandRequest request) {
+    public UpdateStockPriceCmd(CommandRequest request) {
         super(request);
     }
 
@@ -21,17 +23,25 @@ public class AddStockCmd extends CommandHandler {
             return;
         }
 
-        String name = args.get(0);
-        int qty = Integer.parseInt(args.get(1));
-        double price = Double.parseDouble(args.get(2));
+        int productId = Integer.parseInt(args.get(0));
+        double newPrice = Double.parseDouble(args.get(1));
 
-
-        if (ProductDAO.getInstance().selectByName(name) != null) {
-            System.out.println("The product '" + name + "' already exists in the stock.");
+        Product existingProduct = ProductDAO.getInstance().selectById(productId);
+        if (existingProduct == null) {
+            System.out.println("Product not found.");
             return;
         }
 
-        ProductDAO.getInstance().insert(name, qty, price);
+
+        Product updatedProduct = new Product(
+                existingProduct.getId(),
+                existingProduct.getName(),
+                existingProduct.getQuantity(),
+                newPrice
+        );
+
+        ProductDAO.getInstance().update(updatedProduct);
+
     }
 
     private boolean validatePermission() {
@@ -43,24 +53,20 @@ public class AddStockCmd extends CommandHandler {
     }
 
     private boolean validateArgs() {
-        if (args.size() != 3) {
-            System.out.println("Usage: add <name> <quantity> <price>");
+        if (args.size() != 2) {
+            System.out.println("Usage: updateitemprice <id> <price>");
             return false;
         }
 
         try {
-            int newQuantity = Integer.parseInt(args.get(1));
-            if (newQuantity < 0) {
-                System.out.println("Quantity cannot be negative.");
-                return false;
-            }
+            Integer.parseInt(args.get(0));
         } catch (NumberFormatException e) {
-            System.out.println("Invalid quantity. Must be a number.");
+            System.out.println("Invalid product ID. Must be a number.");
             return false;
         }
 
         try {
-            double newPrice = Double.parseDouble(args.get(2));
+            double newPrice = Double.parseDouble(args.get(1));
             if (newPrice < 0) {
                 System.out.println("Price cannot be negative.");
                 return false;

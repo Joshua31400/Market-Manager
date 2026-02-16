@@ -15,7 +15,8 @@ public class App {
             if (currentUser == null) {
                 requestAuth();
             } else {
-                String input = InputReader.getInstance().readString( currentUser.getUsername() + "(" + currentUser.getPermission() + ")" + "> ");
+                String input = InputReader.getInstance().readString( currentUser.getUsername() + " (" + currentUser.getPermission() + ") " + "> ");
+                System.out.println();
                 CommandInterpreter.interpretCommand(input, currentUser);
             }
         }
@@ -38,6 +39,7 @@ public class App {
             case 2 -> requestRegister();
             case 3 -> {
                 System.out.println("Exiting the application. Goodbye!");
+                System.out.println();
                 System.exit(0);
             }
         }
@@ -53,12 +55,15 @@ public class App {
         System.out.println();
 
         User user = AuthService.login(username, password);
+        System.out.println();
 
         if (user != null) {
             currentUser = user;
             System.out.println("Login successful!");
+            System.out.println();
         } else {
             System.out.println("Login failed. Please try again.");
+            System.out.println();
         }
     }
 
@@ -72,6 +77,7 @@ public class App {
         System.out.println();
 
         User user = AuthService.register(username, password, confirmPassword, Permission.CLIENT);
+        System.out.println();
 
         if (user != null) {
             currentUser = user;

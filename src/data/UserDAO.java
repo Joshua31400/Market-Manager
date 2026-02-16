@@ -12,10 +12,6 @@ public class UserDAO extends Database {
 
         private List<User> users;
 
-        public List<User> getAll() {
-            return users;
-        }
-
         private UserDAO(){
             filePath = "src/data/tables/users.json";
             loadData();
@@ -81,6 +77,11 @@ public class UserDAO extends Database {
 
         public boolean update(User updatedUser){
             User existingUser = selectById(updatedUser.getId());
+            if (existingUser == null) {
+                System.out.println("User not found.");
+                return false;
+            }
+
             try {
                 for (int i = 0; i < users.size(); i++) {
                     if (users.get(i).getId() == updatedUser.getId()) {
@@ -90,7 +91,6 @@ public class UserDAO extends Database {
                         return true;
                     }
                 }
-                System.out.println("User not found.");
                 return false;
             } catch (Exception e) {
                 System.out.println("Error updating user: " + e.getMessage());
@@ -102,6 +102,10 @@ public class UserDAO extends Database {
 
         public boolean delete(int userId){
             User existingUser = selectById(userId);
+            if (existingUser == null) {
+                System.out.println("User not found.");
+                return false;
+            }
             try {
                 users.removeIf(u -> u.getId() == userId);
                 saveData();
@@ -114,6 +118,10 @@ public class UserDAO extends Database {
                 return false;
             }
         }
+
+        public List<User> selectAll() {
+        return users;
+    }
 
         public User selectById(int userId) {
             for (User user : users) {

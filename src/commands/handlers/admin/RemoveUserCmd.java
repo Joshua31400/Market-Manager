@@ -1,28 +1,29 @@
-package commands.handlers.common;
+package commands.handlers.admin;
 
 import authentification.Permission;
 import commands.handlers.CommandHandler;
 import commands.src.CommandRequest;
+import data.CartDAO;
 import data.UserDAO;
 import models.User;
 
-public class UpdatePermissionCmd extends CommandHandler {
-    public UpdatePermissionCmd(CommandRequest request) {
+public class RemoveUserCmd extends CommandHandler {
+    public RemoveUserCmd(CommandRequest request) {
         super(request);
     }
 
     @Override
     public void execute() {
-        if (!validateArgs()) {
-            return;
-        }
-
         if (!validatePermission()) {
             return;
         }
 
+        if (!validateArgs()) {
+            return;
+        }
+
+
         int userId = Integer.parseInt(args.get(0));
-        String permissionStr = args.get(1).toUpperCase();
 
         User targetUser = UserDAO.getInstance().selectById(userId);
         if (targetUser == null) {
@@ -30,18 +31,17 @@ public class UpdatePermissionCmd extends CommandHandler {
             return;
         }
 
-        User updatedUser = new User(
-                targetUser.getId(),
-                targetUser.getUsername(),
-                targetUser.getPasswordHash(),
-                Permission.valueOf(permissionStr)
-        );
-        UserDAO.getInstance().update(updatedUser);
+        if (targetUser.getId() == user.getId()) {
+            System.out.println("You cannot remove yourself.");
+            return;
+        }
 
+        UserDAO.getInstance().delete(userId);
+        CartDAO.getInstance().delete(userId);
     }
 
     private boolean validatePermission() {
-        if (user == null || user.getPermission() != Permission.ADMIN) {
+        if (user.getPermission() != Permission.ADMIN) {
             System.out.println("Access denied. This command is restricted to administrators.");
             return false;
         }
@@ -49,8 +49,8 @@ public class UpdatePermissionCmd extends CommandHandler {
     }
 
     private boolean validateArgs() {
-        if (args.size() != 2) {
-            System.out.println("Usage: updatepermission <id> <permission>");
+        if (args.size() != 1) {
+            System.out.println("Usage: removeuser <id>");
             return false;
         }
 
@@ -58,12 +58,6 @@ public class UpdatePermissionCmd extends CommandHandler {
             Integer.parseInt(args.get(0));
         } catch (NumberFormatException e) {
             System.out.println("Invalid user ID. Must be a number.");
-            return false;
-        }
-
-        String permissionStr = args.get(1).toUpperCase();
-        if (!permissionStr.equals("CLIENT") && !permissionStr.equals("STAFF") && !permissionStr.equals("ADMIN")) {
-            System.out.println("Invalid permission. Use CLIENT, STAFF or ADMIN.");
             return false;
         }
 

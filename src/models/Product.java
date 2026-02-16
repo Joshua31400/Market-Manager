@@ -1,5 +1,7 @@
 package models;
 
+import data.ProductDAO;
+
 public class Product {
     private int id;
     private String name;
@@ -13,12 +15,15 @@ public class Product {
         this.price = price;
     }
 
-    // Getters et Setters
+    public Product(String name, int quantity, double price) {
+        this.id = ProductDAO.getInstance().autoIncrement();
+        this.name = name;
+        this.quantity = quantity;
+        this.price = price;
+    }
+
     public int getId() { return id; }
     public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
     public int getQuantity() { return quantity; }
-    public void setQuantity(int quantity) { this.quantity = quantity; }
     public double getPrice() { return price; }
-    public void setPrice(double price) { this.price = price; }
 }

@@ -1,4 +1,4 @@
-package commands.handlers.common;
+package commands.handlers.admin;
 
 import commands.handlers.CommandHandler;
 import commands.src.CommandRequest;
@@ -19,7 +19,12 @@ public class UserListCmd extends CommandHandler {
             return;
         }
 
-        List<User> users = UserDAO.getInstance().getAll();
+        if (!validateArgs()) {
+            return;
+        }
+
+
+        List<User> users = UserDAO.getInstance().selectAll();
 
         if (users.isEmpty()) {
             System.out.println("No users found.");
@@ -41,6 +46,14 @@ public class UserListCmd extends CommandHandler {
     private boolean validatePermission() {
         if (user == null || user.getPermission() != Permission.ADMIN) {
             System.out.println("Access denied. This command is restricted to administrators.");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validateArgs() {
+        if (!args.isEmpty()) {
+            System.out.println("Usage: userlist");
             return false;
         }
         return true;

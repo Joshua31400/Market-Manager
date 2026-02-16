@@ -13,23 +13,22 @@ public class HelpCmd extends CommandHandler {
         }
         System.out.println(getCommonHelpMessage());
 
-        if (user != null) {
-            Permission permission = user.getPermission();
-            if (permission == Permission.CLIENT) {
-                System.out.println(getClientHelpMessage());
-            } else if (permission == Permission.STAFF) {
-                System.out.println(getClientHelpMessage());
-                System.out.println(getStaffHelpMessage());
-            } else if (permission == Permission.ADMIN) {
-                System.out.println(getStaffHelpMessage());
-                System.out.println(getAdminHelpMessage());
-            }
+        Permission permission = user.getPermission();
+
+        if (permission == Permission.CLIENT) {
+            System.out.println(getClientHelpMessage());
+        } else if (permission == Permission.STAFF) {
+            System.out.println(getClientHelpMessage());
+            System.out.println(getStaffHelpMessage());
+        } else if (permission == Permission.ADMIN) {
+            System.out.println(getStaffHelpMessage());
+            System.out.println(getAdminHelpMessage());
         }
     }
 
     private boolean validateArgs() {
         if (!args.isEmpty()) {
-            System.out.println("The help command does not take any arguments.");
+            System.out.println("Usage: help");
             return false;
         }
         return true;
@@ -40,7 +39,6 @@ public class HelpCmd extends CommandHandler {
                Common commands:
                - help: Show this help message.
                - catalog - List all items in the catalog.
-               - info <id> - Show information about an item by its ID.
                - clear: Clear the terminal.
                - quit: Exit the application.
                """;
@@ -59,7 +57,10 @@ public class HelpCmd extends CommandHandler {
     private String getStaffHelpMessage() {
         return """
                Staff commands:
-                - additem <name> <price> <quantity> - Add a new item to the catalog.
+                - additem <name> <quantity> <price> - Add a new item to the catalog.
+                - updateitemname <id> <name> - Update an existing item's name in the catalog by its ID.
+                - updateitemprice <id> <price> - Update an existing item's price in the catalog by its ID.
+                - updateitemquantity <id> <quantity> - Update an existing item's quantity in the
                 - removeitem <id> - Remove an item from the catalog by its ID.
                """;
     }
