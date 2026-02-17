@@ -55,9 +55,9 @@ public class Colors {
         return YELLOW + text + RESET;
     }
 
-    public static String primary(String text) {return PURPLE_BOLD + text + RESET;}
+    public static String primary(String text) {return WHITE_BOLD + text + RESET;}
 
-    public static String secondary(String text) {return PURPLE + text + RESET;}
+    public static String secondary(String text) {return WHITE + text + RESET;}
 
     public static String data(String text) {return YELLOW_BOLD + text + RESET;}
 

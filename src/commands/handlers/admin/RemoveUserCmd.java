@@ -40,7 +40,7 @@ public class RemoveUserCmd extends CommandHandler {
         }
 
         UserDAO.getInstance().delete(userId);
-        CartDAO.getInstance().delete(userId);
+        if (targetUser.getPermission() == Permission.CLIENT) CartDAO.getInstance().delete(userId);
         System.out.println();
     }
 
