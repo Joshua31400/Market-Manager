@@ -1,1 +1,1 @@
-[{"id":1,"userId":4,"products":[]},{"id":2,"userId":5,"products":[]},{"id":4,"userId":7,"products":[]}]
+[{"id":1,"userId":4,"products":[{"id":6,"name":"prensado","quantity":100,"price":66.6}]},{"id":2,"userId":5,"products":[]},{"id":4,"userId":7,"products":[]}]
