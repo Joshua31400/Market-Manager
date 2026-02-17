@@ -66,6 +66,8 @@ public class HelpCmd extends CommandHandler {
         return Colors.primary("Admin commands:") + "\n" +
                 Colors.primary(" - userlist") + Colors.secondary(" - List all users in the system.\n") +
                 Colors.primary(" - adduser <username> <password> <permission>") + Colors.secondary(" - Add a new user with the specified username, password, and permission level (CLIENT, STAFF, ADMIN).\n") +
+                Colors.primary(" - updateusername <id> <new_username>") + Colors.secondary(" - Update the username of an user by its ID.\n") +
+                Colors.primary(" - updatepassword <id> <new_password>") + Colors.secondary(" - Update the password of an user by its ID.\n") +
                 Colors.primary(" - updatepermission <id> <status>") + Colors.secondary(" - Update the permission of an user by its ID. Status can be CLIENT, STAFF or ADMIN.\n") +
                 Colors.primary(" - removeuser <id>") + Colors.secondary(" - Remove a user by their username.\n");
     }

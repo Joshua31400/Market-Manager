@@ -1,9 +1,6 @@
 package commands.handlers;
 
-import commands.handlers.admin.AddUserCmd;
-import commands.handlers.admin.RemoveUserCmd;
-import commands.handlers.admin.UpdatePermissionCmd;
-import commands.handlers.admin.UserListCmd;
+import commands.handlers.admin.*;
 import commands.handlers.client.AddCmd;
 import commands.handlers.client.CartCmd;
 import commands.handlers.client.EmptyCartCmd;
@@ -28,6 +25,8 @@ public class CommandHandlerFactory {
             // Admin commands
             case "userlist" -> new UserListCmd(request);
             case "adduser" -> new AddUserCmd(request);
+            case "updateusername" -> new UpdateUsernameCmd(request);
+            case "updatepassword" -> new UpdatePasswordCmd(request);
             case "updatepermission" -> new UpdatePermissionCmd(request);
             case "removeuser" -> new RemoveUserCmd(request);
 
