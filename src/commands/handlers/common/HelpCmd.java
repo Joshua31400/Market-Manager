@@ -37,11 +37,11 @@ public class HelpCmd extends CommandHandler {
 
     private String getCommonHelpMessage() {
         return Colors.primary("Common commands:") + "\n" +
-                Colors.primary("- help") + Colors.secondary(" - Show this help message.\n") +
-                Colors.primary("- catalog") + Colors.secondary(" - List all items in the catalog.\n") +
-                Colors.primary("- clear") + Colors.secondary(" - Clear the terminal.\n") +
-                Colors.primary("- logout") + Colors.secondary(" - Log out of your account.\n") +
-                Colors.primary("- quit") + Colors.secondary(" - Exit the application.\n");
+                Colors.primary(" - help") + Colors.secondary(" - Show this help message.\n") +
+                Colors.primary(" - catalog") + Colors.secondary(" - List all items in the catalog.\n") +
+                Colors.primary(" - clear") + Colors.secondary(" - Clear the terminal.\n") +
+                Colors.primary(" - logout") + Colors.secondary(" - Log out of your account.\n") +
+                Colors.primary(" - quit") + Colors.secondary(" - Exit the application.\n");
     }
 
     private String getClientHelpMessage() {
