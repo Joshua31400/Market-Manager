@@ -1,10 +1,7 @@
 package commands.handlers;
 
 import commands.handlers.admin.*;
-import commands.handlers.client.AddCmd;
-import commands.handlers.client.CartCmd;
-import commands.handlers.client.EmptyCartCmd;
-import commands.handlers.client.RemoveCmd;
+import commands.handlers.client.*;
 import commands.handlers.common.ClearCmd;
 import commands.handlers.common.HelpCmd;
 import commands.handlers.common.QuitCmd;
@@ -42,6 +39,7 @@ public class CommandHandlerFactory {
             case "remove" -> new RemoveCmd(request);
             case "emptycart" -> new EmptyCartCmd(request);
             case "cart" -> new CartCmd(request);
+            case "buy" -> new BuyCmd(request);
 
             default -> null;
         };
